@@ -22,6 +22,8 @@ export class ProductService {
       image: image.filename,
       title: dto.product_name,
       text: dto.product_text,
+      categoryId: dto.categoryId,
+      price: dto.price,
     });
   }
 
@@ -47,6 +49,9 @@ export class ProductService {
     }
     if (dto.product_name) {
       toUpdate.title = dto.product_name;
+    }
+    if (dto.price) {
+      toUpdate.price = dto.price;
     }
     if (image) {
       if (toUpdate.image !== image.filename) {
