@@ -1,5 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { CategoryEntity } from '../../category/entities/category.entity';
+import { CartEntity } from '../../cart/entities/cart.entity';
+import { ApiHideProperty } from '@nestjs/swagger';
 
 @Entity('product_card')
 export class ProductEntity {
@@ -17,6 +19,10 @@ export class ProductEntity {
 
   @ManyToOne(() => CategoryEntity, (category) => category.products)
   category: CategoryEntity;
+
+  @ApiHideProperty()
+  @ManyToOne(() => CartEntity, (cart) => cart.products)
+  cart: CartEntity;
 
   @Column()
   price: number;

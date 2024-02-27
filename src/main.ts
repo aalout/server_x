@@ -3,11 +3,15 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { useContainer } from 'typeorm';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe());
+  useContainer(app.select(AppModule), {
+    fallbackOnErrors: true,
+  });
 
   const config = new DocumentBuilder()
     .setTitle('School X - OpenAPI 3.0')
