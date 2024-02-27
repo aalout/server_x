@@ -13,13 +13,13 @@ export class CartEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  name: string;
-
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
   @ApiHideProperty()
   @OneToMany(() => ProductEntity, (product) => product.cart)
   products: ProductEntity[];
+
+  @Column()
+  productId: number;
 }

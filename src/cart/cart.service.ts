@@ -24,13 +24,11 @@ export class CartService {
     return this.cartRepository.findOneBy({ id });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async update(id: number, dto: UpdatecartDto) {
     const toUpdate = await this.cartRepository.findOneBy({ id });
     if (!toUpdate) {
       throw new BadRequestException(`Запись с id=${id} не найдена`);
-    }
-    if (dto.name) {
-      toUpdate.name = dto.name;
     }
     return this.cartRepository.save(toUpdate);
   }
