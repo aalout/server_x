@@ -20,10 +20,6 @@ export class CartService {
     return this.cartRepository.find();
   }
 
-  findOne(id: number) {
-    return this.cartRepository.findOneBy({ id });
-  }
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async update(id: number, dto: UpdatecartDto) {
     const toUpdate = await this.cartRepository.findOneBy({ id });

@@ -5,4 +5,8 @@ export class CreateCartDto {
   @IsNumber()
   @ApiProperty()
   productId: number;
+
+  @IsNumber()
+  @ApiProperty()
+  quantity: number;
 }

@@ -1,20 +1,11 @@
 import { ApiHideProperty } from '@nestjs/swagger';
 import { ProductEntity } from '../../product_cards/entities/product_card.entity';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('cart')
 export class CartEntity {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @CreateDateColumn({ type: 'timestamp' })
-  createdAt: Date;
 
   @ApiHideProperty()
   @OneToMany(() => ProductEntity, (product) => product.cart)
@@ -22,4 +13,7 @@ export class CartEntity {
 
   @Column()
   productId: number;
+
+  @Column()
+  quantity: number;
 }
