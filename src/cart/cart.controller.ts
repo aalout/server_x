@@ -12,7 +12,6 @@ import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdatecartDto } from './dto/update-cart.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
-//import { ApiConsumes } from '@nestjs/swagger';
 
 @ApiTags('cart')
 @Controller('cart')
@@ -20,7 +19,6 @@ export class CartController {
   constructor(private readonly cartService: CartService) {}
 
   @Post()
-  //@ApiConsumes('multipart/form-data')
   async create(@Body(new ValidationPipe()) createCartDto: CreateCartDto) {
     return this.cartService.create(createCartDto);
   }
@@ -28,6 +26,11 @@ export class CartController {
   @Get()
   findAll() {
     return this.cartService.findAll();
+  }
+
+  @Get('total-price')
+  async getTotalPrice(): Promise<number> {
+    return await this.cartService.calculateTotalPrice();
   }
 
   @Patch(':id')
