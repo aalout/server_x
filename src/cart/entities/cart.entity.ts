@@ -15,7 +15,7 @@ export class CartEntity {
   productId: number;
 
   @Column()
-  userId: number; // Новое поле для идентификатора пользователя
+  userId: number;
 
   @Column()
   quantity: number;

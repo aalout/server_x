@@ -6,7 +6,7 @@ export class OrderEntity {
   id: number;
 
   @Column()
-  products: string; // Изменили тип на string
+  products: string;
 
   @Column()
   deliveryAddress: string;
@@ -16,4 +16,7 @@ export class OrderEntity {
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   totalPrice: number;
+
+  @Column()
+  userId: number;
 }

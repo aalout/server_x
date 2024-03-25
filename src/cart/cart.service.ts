@@ -27,7 +27,7 @@ export class CartService {
     cart.productId = dto.productId;
     cart.quantity = dto.quantity;
     cart.price = product.price;
-    cart.userId = id; // Сохраняем userId в корзине
+    cart.userId = id;
 
     return this.cartRepository.save(cart);
   }
@@ -54,7 +54,7 @@ export class CartService {
     let totalPrice = 0;
 
     cartItems.forEach((cartItem) => {
-      totalPrice += cartItem.price * cartItem.quantity; // Вычисляем общую сумму для каждой записи в корзине
+      totalPrice += cartItem.price * cartItem.quantity;
     });
 
     return totalPrice;

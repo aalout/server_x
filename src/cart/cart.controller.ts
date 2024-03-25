@@ -16,7 +16,6 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 
 @ApiTags('cart')
-// Пример обновления контроллера для передачи userId извне
 @Controller('cart')
 export class CartController {
   constructor(private readonly cartService: CartService) {}
@@ -25,7 +24,7 @@ export class CartController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   async create(@Req() req, @Body() createCartDto: CreateCartDto) {
-    const { id } = req.user; // Получаем userId пользователя из запроса
+    const { id } = req.user;
     return this.cartService.create(id, createCartDto);
   }
 
