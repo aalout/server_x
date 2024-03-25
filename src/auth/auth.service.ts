@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   ForbiddenException,
   Injectable,
@@ -23,6 +22,7 @@ export class AuthService {
     const user = await this.usersService.findByUsername(username);
 
     if (user && user.password === password) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = user;
       return result;
     }

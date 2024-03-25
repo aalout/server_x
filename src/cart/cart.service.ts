@@ -15,7 +15,7 @@ export class CartService {
     private productRepository: Repository<ProductEntity>,
   ) {}
 
-  async create(dto: CreateCartDto) {
+  async create(id: number, dto: CreateCartDto) {
     const product = await this.productRepository.findOne({
       where: { id: dto.productId },
     });
@@ -26,7 +26,8 @@ export class CartService {
     const cart = new CartEntity();
     cart.productId = dto.productId;
     cart.quantity = dto.quantity;
-    cart.price = product.price; // Устанавливаем цену из таблицы product_card
+    cart.price = product.price;
+    cart.userId = id; // Сохраняем userId в корзине
 
     return this.cartRepository.save(cart);
   }

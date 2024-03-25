@@ -1,6 +1,6 @@
 import { ApiHideProperty } from '@nestjs/swagger';
-import { ProductEntity } from '../../product_cards/entities/product_card.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ProductEntity } from 'src/product_cards/entities/product_card.entity';
 
 @Entity('cart')
 export class CartEntity {
@@ -13,6 +13,9 @@ export class CartEntity {
 
   @Column()
   productId: number;
+
+  @Column()
+  userId: number; // Новое поле для идентификатора пользователя
 
   @Column()
   quantity: number;
