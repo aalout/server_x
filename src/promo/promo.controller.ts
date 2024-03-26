@@ -9,6 +9,7 @@ import {
   UseInterceptors,
   UploadedFile,
   Response,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiTags, ApiConsumes } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -20,6 +21,8 @@ import { UpdatePromoDto } from './dto/update-promo.dto';
 import { PromoEntity } from './entities/promo.entity';
 import { DeleteResult } from 'typeorm';
 
+import { RolesGuard } from '../guards/roles.guard';
+
 @ApiTags('promo')
 @Controller('promo')
 export class PromoController {
@@ -28,6 +31,7 @@ export class PromoController {
   @Post()
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('image', { storage: fileStorage }))
+  @UseGuards(RolesGuard)
   create(
     @Body() dto: CreatePromoDto,
     @UploadedFile() image: Express.Multer.File,
@@ -36,6 +40,7 @@ export class PromoController {
   }
 
   @Get()
+  @UseGuards(RolesGuard)
   findAll(): Promise<PromoEntity[]> {
     return this.promoService.findAll();
   }
@@ -46,6 +51,7 @@ export class PromoController {
   }
 
   @Get(':id')
+  @UseGuards(RolesGuard)
   findOne(@Param('id') id: string): Promise<PromoEntity> {
     return this.promoService.findOne(+id);
   }
@@ -53,6 +59,7 @@ export class PromoController {
   @Patch(':id')
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('image', { storage: fileStorage }))
+  @UseGuards(RolesGuard)
   update(
     @Param('id') id: string,
     @Body() dto: UpdatePromoDto,
@@ -62,6 +69,7 @@ export class PromoController {
   }
 
   @Delete(':id')
+  @UseGuards(RolesGuard)
   remove(@Param('id') id: string): Promise<DeleteResult> {
     return this.promoService.delete(+id);
   }

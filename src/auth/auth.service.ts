@@ -40,17 +40,19 @@ export class AuthService {
       const userData = await this.usersService.create(dto);
 
       return {
-        token: this.jwtService.sign({ id: userData.id }),
+        token: this.jwtService.sign({
+          id: userData.id,
+          roles: userData.roles[0],
+        }), // Передаем первый элемент массива ролей
       };
     } catch (err) {
-      // throw new ForbiddenException('Ошибка при регистрации');
       throw new ForbiddenException(err.message);
     }
   }
 
   async login(user: UserEntity) {
     return {
-      token: this.jwtService.sign({ id: user.id }),
+      token: this.jwtService.sign({ id: user.id, roles: user.roles[0] }), // Передаем первый элемент массива ролей
     };
   }
 }

@@ -17,6 +17,9 @@ export class UserEntity {
   @Column()
   password: string;
 
+  @Column('simple-array', { default: ['user'] })
+  roles: string[];
+
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 

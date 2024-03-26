@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { CartModule } from './cart/cart.module';
 import { OrderModule } from './order/order.module';
+import { RolesService } from './guards/roles.service';
 
 @Module({
   imports: [
@@ -30,6 +31,6 @@ import { OrderModule } from './order/order.module';
     OrderModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [RolesService],
 })
 export class AppModule {}
